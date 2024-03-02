@@ -1,3 +1,11 @@
-export function helloAnything(thing: number): string {
-  return `Count is oh yea no ${thing}!`
-}
+import { Techradar } from "./Techradar";
+
+import type {
+  TechradarData,
+  TechradarOptions,
+  TechradarVizData,
+} from "./types";
+
+export default Techradar;
+
+export type { TechradarData, TechradarOptions, TechradarVizData };

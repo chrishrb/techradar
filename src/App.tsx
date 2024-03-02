@@ -1,11 +1,41 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { helloAnything } from '../lib/main'
+import Techradar from '../lib/main'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const exampleData = {
+    rings: [
+      { id: "go", name: "Go for it" },
+      { id: "check", name: "Check it out" },
+      { id: "hold", name: "Hold your horses" },
+    ],
+    slices: [
+      {
+        name: "Frameworks & Ecosystems",
+        blipsByRing: {
+          go: [{ name: "React" }],
+          check: [{ name: "Vue" }, { name: "Angular (2+)" }],
+          hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
+        },
+      },
+      {
+        name: "Linting & Formatting",
+        blipsByRing: {
+          go: [{ name: "ESLint" }, { name: "Prettier" }],
+          check: [{ name: "AirBNB Eslint Config" }],
+        },
+      },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          go: [{ name: "CRA (Create React App)" }],
+          check: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          hold: [],
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -17,18 +47,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          {helloAnything(count)}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Techradar data={exampleData}/>
     </>
   )
 }
