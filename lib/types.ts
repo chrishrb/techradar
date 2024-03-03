@@ -34,8 +34,6 @@ export type TechradarAreaVizData = {
   sliceIndex: number,
   ringIndex: number,
   path: string,
-  startAngle: number,
-  endAngle: number,
 };
 
 export type TechradarBlipVizData = TechradarBlipData & {
@@ -47,6 +45,9 @@ export type TechradarBlipVizData = TechradarBlipData & {
 
 export type TechradarSliceVizData = {
   name: string,
+  x: number,
+  y: number,
+  textAnchor: string,
 };
 
 export type TechradarRingVizData = TechradarRingData & {

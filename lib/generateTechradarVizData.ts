@@ -40,6 +40,20 @@ const generateTechradarVizData = (
     return radius;
   }
 
+  const radius = (sliceIndex: number): number => {
+    return (360 / data.slices.length) * sliceIndex;
+  }
+
+  const textAnchor = (x: number): string => {
+    if (x < -10) {
+      return "end";
+    } else if (x > 10) {
+      return "start";
+    } else {
+      return "middle";
+    }
+  }
+
   //generate arc per slice
   const arcs = pie()
     .value(1)(data.slices.map((_, index) => index))
@@ -92,8 +106,22 @@ const generateTechradarVizData = (
 
       const { blipsByRing, ...sliceDetails } = sliceData;
 
+      // Calculate the position of the slice
+      const alpha = radius(sliceIndex) + 0.5 * (radius(sliceIndex + 1) - radius(sliceIndex))
+      const gamma = 90
+      const beta = 180 - gamma - alpha
+
+      const radarSizeWithPadding = radarSize + 50;
+      const x = (radarSizeWithPadding / 2) * Math.sin(alpha * Math.PI / 180)
+      const y = -1 * (radarSizeWithPadding / 2) * Math.sin(beta * Math.PI / 180)
+
       const slice: TechradarSliceVizData = {
         ...sliceDetails,
+        x: x,
+        y: y,
+        textAnchor: textAnchor(x),
+        // startAngle: radius(sliceIndex),
+        // endAngle: radius(sliceIndex + 1),
       };
 
       //generate areas and blips for all of this slice's rings
@@ -105,8 +133,6 @@ const generateTechradarVizData = (
           const area: TechradarAreaVizData = {
             sliceIndex,
             ringIndex,
-            startAngle: arc.startAngle,
-            endAngle: arc.endAngle,
             path: ringPathInfo.generator(arc),
           };
 

@@ -23,6 +23,9 @@ const createTechradar = (
   //generate areas and blips
   const vizData = generateTechradarVizData(data, vizOptions);
 
+  const size = vizData.global.radarSize + 400;
+  const radarRadius = size / 2;
+
   //setup base svg
   const techradar = select(targetEl)
     .append("svg")
@@ -30,15 +33,14 @@ const createTechradar = (
     .style("-moz-user-select", "none")
     .style("-ms-user-select", "none")
     .style("user-select", "none")
-    .attr("width", vizData.global.radarSize)
-    .attr("height", vizData.global.radarSize);
+    .attr("width", size)
+    .attr("height", size);
 
-  const radarCenter = vizData.global.radarSize / 2;
 
   //add centered container
   const container = techradar
     .append("g")
-    .attr("transform", `translate(${radarCenter}, ${radarCenter})`);
+    .attr("transform", `translate(${radarRadius}, ${radarRadius})`);
 
   //add areas
   container
@@ -68,6 +70,20 @@ const createTechradar = (
     .attr("user-select", "none")
     .attr("fill", rings => rings.color)
     .text(rings => rings.name)
+
+  techradar
+    .append("g")
+    .attr("transform", `translate(${radarRadius}, ${radarRadius})`)
+    .selectAll("path")
+    .data(vizData.slices)
+    .enter()
+    .append("text")
+    .attr("fill", "white")
+    .attr("text-anchor", slice => slice.textAnchor)
+    .attr("x", slice => slice.x)
+    .attr("y", slice => slice.y)
+    .text(slice => slice.name);
+    
 
   //add blips
   const blips = container

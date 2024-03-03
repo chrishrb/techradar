@@ -35,6 +35,22 @@ function App() {
           hold: [],
         },
       },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          hold: [],
+        },
+      },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          hold: [],
+        },
+      },
     ],
   };
 
