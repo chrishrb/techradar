@@ -2,7 +2,6 @@ import {
   pie,
   arc,
   scaleLinear,
-  scaleLog,
   scaleSequential,
   interpolateRainbow,
 } from "d3";
@@ -17,24 +16,29 @@ import type {
   TechradarBlipVizData,
   TechradarAreaVizData,
   TechradarRingData,
+  TechradarRingVizData,
 } from "./types";
-
-const OUTER_PADDING = 5;
 
 const generateTechradarVizData = (
   data: TechradarData,
   options?: TechradarVizOptions
 ): TechradarVizData => {
-  const { radarSize = 600, blipRadius = 10 } = options || {};
+  const { radarSize = 900, blipRadius = 10 } = options || {};
 
   //setup base scales
   const sliceColorScale = scaleSequential()
     .domain([0, data.slices.length])
     .interpolator(interpolateRainbow);
 
-  const radiusScale = scaleLog()
-    .domain([1, data.rings.length + 1])
-    .range([0, radarSize / 2 - OUTER_PADDING]);
+
+  const radiusScale = (ringIndex: number): number => {
+    // Make the first ring a bit bigger
+    let radius = (radarSize / (2 * (data.rings.length+0.5))) * ringIndex;
+    if (ringIndex > 0) {
+      radius += (radarSize / (2 * (data.rings.length+1))) / 2;
+    }
+    return radius;
+  }
 
   //generate arc per slice
   const arcs = pie()
@@ -44,15 +48,20 @@ const generateTechradarVizData = (
   //generate ring derived data from data.rings
   const ringsDerivedData = data.rings.reduce(
     (acc: { rings: TechradarRingData[]; pathInfoList: any; }, ringData, ringIndex) => {
-      const innerRadius = radiusScale(ringIndex + 1);
-      const outerRadius = radiusScale(ringIndex + 2);
+      const innerRadius = radiusScale(ringIndex);
+      const outerRadius = radiusScale(ringIndex + 1);
 
       //arc path generator
       const generator = arc()
         .innerRadius(innerRadius)
         .outerRadius(outerRadius);
 
-      const ring: TechradarRingData = {
+      const color = sliceColorScale(ringIndex);
+      const ring: TechradarRingVizData = {
+        y: -outerRadius,
+        // TODO: use own color
+        color: color,
+        textColor: readableColor(color),
         ...ringData,
       };
 
@@ -81,14 +90,10 @@ const generateTechradarVizData = (
     (acc: { areas: any[]; blips: any[]; slices: any[]; }, sliceData, sliceIndex) => {
       const arc = arcs[sliceIndex];
 
-      const color = sliceColorScale(sliceIndex);
-
       const { blipsByRing, ...sliceDetails } = sliceData;
 
       const slice: TechradarSliceVizData = {
         ...sliceDetails,
-        color,
-        textColor: (readableColor(color)),
       };
 
       //generate areas and blips for all of this slice's rings
@@ -100,6 +105,8 @@ const generateTechradarVizData = (
           const area: TechradarAreaVizData = {
             sliceIndex,
             ringIndex,
+            startAngle: arc.startAngle,
+            endAngle: arc.endAngle,
             path: ringPathInfo.generator(arc),
           };
 

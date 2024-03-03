@@ -6,31 +6,32 @@ import Techradar from '../lib/main'
 function App() {
   const exampleData = {
     rings: [
-      { id: "go", name: "Go for it" },
-      { id: "check", name: "Check it out" },
-      { id: "hold", name: "Hold your horses" },
+      { id: "adopt", name: "ADOPT" },
+      { id: "trial", name: "TRIAL" },
+      { id: "assess", name: "ASSESS" },
+      { id: "hold", name: "HOLD" },
     ],
     slices: [
       {
         name: "Frameworks & Ecosystems",
         blipsByRing: {
-          go: [{ name: "React" }],
-          check: [{ name: "Vue" }, { name: "Angular (2+)" }],
+          adopt: [{ name: "React" }],
+          trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
           hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
         },
       },
       {
         name: "Linting & Formatting",
         blipsByRing: {
-          go: [{ name: "ESLint" }, { name: "Prettier" }],
-          check: [{ name: "AirBNB Eslint Config" }],
+          adopt: [{ name: "ESLint" }, { name: "Prettier" }],
+          trial: [{ name: "AirBNB Eslint Config" }],
         },
       },
       {
         name: "Project starter",
         blipsByRing: {
-          go: [{ name: "CRA (Create React App)" }],
-          check: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          adopt: [{ name: "CRA (Create React App)" }],
+          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
           hold: [],
         },
       },

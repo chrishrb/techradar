@@ -52,6 +52,23 @@ const createTechradar = (
     .attr("stroke-width", "0.5")
     .attr("d", area => area.path);
 
+  container
+    .selectAll("g")
+    .data(vizData.rings)
+    .enter()
+    .append("text")
+    .attr("y", rings => rings.y)
+    .attr("dy", 70)
+    .attr("text-anchor", "middle")
+    .attr("opacity", 0.35)
+    .attr("font-family", "Arial, Helvetica")
+    .attr("font-size", "42px")
+    .attr("font-weight", "bold")
+    .attr("pointer-events", "none")
+    .attr("user-select", "none")
+    .attr("fill", rings => rings.color)
+    .text(rings => rings.name)
+
   //add blips
   const blips = container
     .selectAll("g")
@@ -65,14 +82,14 @@ const createTechradar = (
     .append("circle")
     .attr("r", vizData.global.blipRadius)
     .attr("stroke", "black")
-    .attr("fill", blip => vizData.slices[blip.sliceIndex].color);
+    .attr("fill", blip => vizData.rings[blip.ringIndex].color);
 
   blips
     .append("text")
     .style("pointer-events", "none")
     .attr("dy", 4)
     .attr("text-anchor", "middle")
-    .attr("fill", blip => vizData.slices[blip.sliceIndex].textColor)
+    .attr("fill", blip => vizData.rings[blip.ringIndex].textColor)
     .text((_, blipIndex) => blipIndex + 1);
 
   let tooltip: Tooltip;
