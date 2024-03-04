@@ -1,7 +1,13 @@
 export enum ColorScheme {
-  black = 'white',
-  white = 'black'
+  BLACK = 'white',
+  WHITE = 'black'
 };
+
+export enum TechradarBlipState {
+  UP,
+  DOWN,
+  STABLE,
+}
 
 export type TechradarRingData = {
   id: string,
@@ -10,8 +16,8 @@ export type TechradarRingData = {
 
 export type TechradarBlipData = {
   name: string,
-  description?: string,
   url?: string,
+  state?: TechradarBlipState,
 };
 
 export type TechradarSliceData = {

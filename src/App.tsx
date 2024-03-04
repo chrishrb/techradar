@@ -1,7 +1,8 @@
-import Techradar from '../lib/main'
+import Techradar, { TechradarData } from '../lib/main'
+import { TechradarBlipState } from '../lib/types';
 
 function App() {
-  const exampleData = {
+  const exampleData: TechradarData = {
     rings: [
       { id: "adopt", name: "ADOPT" },
       { id: "trial", name: "TRIAL" },
@@ -35,7 +36,7 @@ function App() {
         name: "Project starter",
         blipsByRing: {
           adopt: [{ name: "CRA (Create React App)" }],
-          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          assess: [{ name: "Next.js", state: TechradarBlipState.DOWN }, { name: "React App Rewired" }],
         },
       },
       {
@@ -58,7 +59,7 @@ function App() {
   return (
     <>
       <div style={{width: "100%"}}>
-      <Techradar data={exampleData}/>
+      <Techradar data={exampleData} options={{radarSize: 600}}/>
 
       </div>
     </>

@@ -1,16 +1,17 @@
-import { select } from "d3";
+import { select, symbol, symbolTriangle } from "d3";
 
 import generateTechradarVizData from "./generateTechradarVizData";
 
 import Tooltip from "./Tooltip";
 
-import type {
-    ColorScheme,
-  TechradarBlipVizData,
-  TechradarData,
-  TechradarOptions,
-  TechradarSliceVizData,
-  TechradarVizData,
+import {
+    TechradarBlipState,
+    type ColorScheme,
+  type TechradarBlipVizData,
+  type TechradarData,
+  type TechradarOptions,
+  type TechradarSliceVizData,
+  type TechradarVizData,
 } from "./types";
 
 function highlightLegendItem(blip: TechradarBlipVizData, color: string) {
@@ -84,11 +85,11 @@ const createTechradar = (
     .enter()
     .append("text")
     .attr("y", rings => rings.y)
-    .attr("dy", 70)
+    .attr("dy", vizData.global.radarSize/12)
     .attr("text-anchor", "middle")
     .attr("opacity", 0.35)
     .attr("font-family", "Arial, Helvetica")
-    .attr("font-size", "42px")
+    .attr("font-size", `${vizData.global.radarSize/21}px`)
     .attr("font-weight", "bold")
     .attr("pointer-events", "none")
     .attr("user-select", "none")
@@ -106,9 +107,23 @@ const createTechradar = (
     .attr("transform", blip => `translate(${blip.x}, ${blip.y})`);
 
   blips
+    .filter(blip => blip.state === TechradarBlipState.STABLE || blip.state === undefined)
     .append("circle")
     .attr("r", vizData.global.blipRadius)
     .attr("fill", blip => vizData.rings[blip.ringIndex].color);
+
+  blips
+    .filter(blip => blip.state === TechradarBlipState.UP)
+    .append("path")
+    .attr("d", symbol(symbolTriangle).size(vizData.global.blipRadius * 30))
+    .attr("fill", blip => vizData.rings[blip.ringIndex].color);
+
+  blips
+    .filter(blip => blip.state === TechradarBlipState.DOWN)
+    .append("path")
+    .attr("d", symbol(symbolTriangle).size(vizData.global.blipRadius * 30))
+    .attr("fill", blip => vizData.rings[blip.ringIndex].color)
+    .attr("transform", "rotate(-180)");
 
   blips
     .append("text")
@@ -207,7 +222,7 @@ const createTechradar = (
         .text(blip => `${blip.blipIndex}. ${blip.name}`);
 
       if (counter % 2 === 0) {
-        dy.left += 80;
+        dy.left += 60;
       } else {
         dy.right += 80;
       }
@@ -221,13 +236,21 @@ const createTechradar = (
       .attr("transform", `translate(${getXTransform(vizData.slices[sliceIndex], bbox)}, ${getYTransform(vizData.slices[sliceIndex], bbox)})`);
   }
 
-  // Position techradar and labels
-  const X_PADDING = 0;
-  const Y_PADDING = 0;
+
+  // Get bounding box of techradar
   const bRect = (techradar.node() as SVGSVGElement).getBBox();
-  console.log(bRect);
+
+  // footer
+  techradar.append("text")
+    .attr("transform", `translate(10, ${bRect.height + 15})`)
+    .text("▲ moved up     ▼ moved down")
+    .attr("xml:space", "preserve")
+    .style("font-family", "Arial, Helvetica")
+    .style("font-size", "10px");
+
+  // Position techradar and labels
   techradar
-    .attr("width", bRect.width + X_PADDING).attr("height", bRect.height + Y_PADDING)
+    .attr("width", bRect.width).attr("height", bRect.height + 20)
   container
     .attr("transform", `translate(${Math.abs(bRect.x)}, ${Math.abs(bRect.y)})`);
 
