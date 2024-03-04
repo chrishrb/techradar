@@ -35,6 +35,10 @@ const createTechradar = (
     .style("user-select", "none")
     .attr("width", size)
     .attr("height", size);
+    // TODO: make it responsive
+    // .attr("preserveAspectRatio", "xMinYMin meet")
+    // .attr("viewBox", `0 0 ${size} ${size}`)
+    // .classed("svg-content-responsive", true); 
 
 
   //add centered container

@@ -15,9 +15,9 @@ import type {
   TechradarSliceVizData,
   TechradarBlipVizData,
   TechradarAreaVizData,
-  TechradarRingData,
   TechradarRingVizData,
 } from "./types";
+import seedrandom from "seedrandom";
 
 const generateTechradarVizData = (
   data: TechradarData,
@@ -59,9 +59,11 @@ const generateTechradarVizData = (
     .value(1)(data.slices.map((_, index) => index))
     .sort();
 
+  const rand = seedrandom("seed");
+
   //generate ring derived data from data.rings
   const ringsDerivedData = data.rings.reduce(
-    (acc: { rings: TechradarRingData[]; pathInfoList: any; }, ringData, ringIndex) => {
+    (acc: { rings: TechradarRingVizData[]; pathInfoList: any; }, ringData, ringIndex) => {
       const innerRadius = radiusScale(ringIndex);
       const outerRadius = radiusScale(ringIndex + 1);
 
@@ -150,7 +152,7 @@ const generateTechradarVizData = (
             //repetively try to generate a new random position that doesn't collide with other existing ones
             for (let tries = 1; ; tries++) {
               //calculate random distance within the current ring
-              const distance = ringPathInfo.blipDistanceScale(Math.random());
+              const distance = ringPathInfo.blipDistanceScale(rand());
 
               //calculate angle padding to avoid blip overlapping adjacent slices
               const anglePadding = Math.asin(blipRadius / distance);
@@ -163,7 +165,7 @@ const generateTechradarVizData = (
               //if there is enough space, calculate random angle within the current ring, otherwise center it
               const angle =
                 maxAngle > minAngle
-                  ? blipAngleScale(Math.random())
+                  ? blipAngleScale(rand())
                   : blipAngleScale(0.5);
 
               //convert to polar coords
