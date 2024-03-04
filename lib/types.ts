@@ -12,6 +12,7 @@ export enum TechradarBlipState {
 export type TechradarRingData = {
   id: string,
   name: string,
+  color?: string,
 };
 
 export type TechradarBlipData = {

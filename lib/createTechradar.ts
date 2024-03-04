@@ -129,6 +129,10 @@ const createTechradar = (
     .append("text")
     .style("pointer-events", "none")
     .attr("dy", 4)
+    .attr("font-family", "Arial, Helvetica")
+    .attr("font-size", "10px")
+    .attr("pointer-events", "none")
+    .attr("user-select", "none")
     .attr("text-anchor", "middle")
     .attr("fill", blip => vizData.rings[blip.ringIndex].textColor)
     .text(blip => blip.blipIndex);
@@ -171,8 +175,8 @@ const createTechradar = (
       .text(vizData.slices[sliceIndex].name);
 
 
-    const dx = { left: 0, right: 200 };
-    const dy = { left: 30, right: 30 };
+    const leftCoords = { x: 0, y: 30 };
+    const rightCoords = { x: 200, y: 30 };
     let counter = 0;
     for (let ringIndex = 0; ringIndex < vizData.rings.length; ringIndex++) {
       if (vizData.blips.filter(blip => blip.sliceIndex === sliceIndex && blip.ringIndex === ringIndex).length === 0) {
@@ -185,8 +189,8 @@ const createTechradar = (
         .attr("font-size", "12px")
         .attr("font-weight", "bold")
         .attr("fill", vizData.rings[ringIndex].color)
-        .attr("dx", counter % 2 === 0 ? dx.left : dx.right)
-        .attr("dy", counter % 2 === 0 ? dy.left : dy.right)
+        .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
+        .attr("dy", counter % 2 === 0 ? leftCoords.y : rightCoords.y)
         .text(vizData.rings[ringIndex].name);
 
       labelsContainer
@@ -204,8 +208,15 @@ const createTechradar = (
         .style("font-size", "11px")
         .attr("id", blip => `legendItem-${blip.blipIndex}`)
         .attr("fill", vizData.global.colorScheme)
-        .attr("dx", counter % 2 === 0 ? dx.left : dx.right)
-        .attr("dy", (_, idx) => (counter % 2 === 0 ? dy.left : dy.right) + ((idx + 1) * 20))
+        .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
+        .attr("dy", () => {
+          const step = 15;
+          if (counter % 2 === 0) {
+            return leftCoords.y += step;
+          } else {
+            return rightCoords.y += step;
+          }
+        })
         .on("mouseover", (_, blip) => {
           highlightLegendItem(blip, vizData.rings[ringIndex].color)
 
@@ -222,11 +233,11 @@ const createTechradar = (
         .text(blip => `${blip.blipIndex}. ${blip.name}`);
 
       if (counter % 2 === 0) {
-        dy.left += 60;
+        leftCoords.y += 30;
       } else {
-        dy.right += 80;
+        rightCoords.y += 30;
       }
-      counter++;
+      counter+=1;
     }
 
     // Position slice labels
@@ -242,7 +253,7 @@ const createTechradar = (
 
   // footer
   techradar.append("text")
-    .attr("transform", `translate(10, ${bRect.height + 15})`)
+    .attr("transform", `translate(10, ${bRect.height + 20})`)
     .text("▲ moved up     ▼ moved down")
     .attr("xml:space", "preserve")
     .style("font-family", "Arial, Helvetica")
@@ -250,7 +261,7 @@ const createTechradar = (
 
   // Position techradar and labels
   techradar
-    .attr("width", bRect.width).attr("height", bRect.height + 20)
+    .attr("width", bRect.width).attr("height", bRect.height + 25)
   container
     .attr("transform", `translate(${Math.abs(bRect.x)}, ${Math.abs(bRect.y)})`);
 

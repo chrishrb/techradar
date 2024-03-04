@@ -6,8 +6,6 @@ import {
   interpolateRainbow,
 } from "d3";
 
-import { readableColor } from "polished";
-
 import {
   type TechradarData,
   type TechradarVizOptions,
@@ -82,12 +80,10 @@ const generateTechradarVizData = (
         .innerRadius(innerRadius)
         .outerRadius(outerRadius);
 
-      const color = sliceColorScale(ringIndex);
       const ring: TechradarRingVizData = {
         y: -outerRadius,
-        // TODO: use own color
-        color: color,
-        textColor: readableColor(color),
+        color: ringData.color ? ringData.color : sliceColorScale(ringIndex),
+        textColor: "white",
         ...ringData,
       };
 
@@ -109,7 +105,7 @@ const generateTechradarVizData = (
     }
   );
 
-  const minBlipCenterDistance = blipRadius * 2;
+  const minBlipCenterDistance = blipRadius * 2.2;
 
   //generate VizData ({slices, areas, blips}) from combining data.slices with data.rings
   const slicesDerivedData = data.slices.reduce(
