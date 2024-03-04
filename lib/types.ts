@@ -1,3 +1,5 @@
+export type FontColor = 'black' | 'white';
+
 export type TechradarRingData = {
   id: string,
   name: string,
@@ -24,10 +26,12 @@ export type TechradarData = {
 export type TechradarVizOptions = {
   radarSize?: number,
   blipRadius?: number,
+  fontColor?: FontColor,
 };
 
 export type TechradarOptions = TechradarVizOptions & {
   blipTooltipEnabled?: boolean,
+  linksInNewTabs?: boolean,
 };
 
 export type TechradarAreaVizData = {
@@ -37,17 +41,22 @@ export type TechradarAreaVizData = {
 };
 
 export type TechradarBlipVizData = TechradarBlipData & {
+  blipIndex: number,
   sliceIndex: number,
   ringIndex: number,
   x: number,
   y: number,
 };
 
+export type Anchor = {
+  x: 'left' | 'middle' | 'right',
+  y: 'top' | 'bottom',
+}
 export type TechradarSliceVizData = {
   name: string,
   x: number,
   y: number,
-  textAnchor: string,
+  anchor: Anchor,
 };
 
 export type TechradarRingVizData = TechradarRingData & {
@@ -60,6 +69,7 @@ export type TechradarVizData = {
   global: {
     radarSize: number,
     blipRadius: number,
+    fontColor: 'black' | 'white',
   },
   areas: TechradarAreaVizData[],
   blips: TechradarBlipVizData[],

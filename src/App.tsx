@@ -1,5 +1,3 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Techradar from '../lib/main'
 
@@ -24,31 +22,14 @@ function App() {
         name: "Linting & Formatting",
         blipsByRing: {
           adopt: [{ name: "ESLint" }, { name: "Prettier" }],
-          trial: [{ name: "AirBNB Eslint Config" }],
+          assess: [{ name: "AirBNB Eslint Config" }],
         },
       },
       {
         name: "Project starter",
         blipsByRing: {
           adopt: [{ name: "CRA (Create React App)" }],
-          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
-          hold: [],
-        },
-      },
-      {
-        name: "Project starter",
-        blipsByRing: {
-          adopt: [{ name: "CRA (Create React App)" }],
-          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
-          hold: [],
-        },
-      },
-      {
-        name: "Project starter",
-        blipsByRing: {
-          adopt: [{ name: "CRA (Create React App)" }],
-          trial: [{ name: "Next.js" }, { name: "React App Rewired" }],
-          hold: [],
+          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
         },
       },
     ],

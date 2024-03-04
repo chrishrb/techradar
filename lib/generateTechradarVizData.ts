@@ -16,6 +16,7 @@ import type {
   TechradarBlipVizData,
   TechradarAreaVizData,
   TechradarRingVizData,
+  Anchor,
 } from "./types";
 import seedrandom from "seedrandom";
 
@@ -23,7 +24,7 @@ const generateTechradarVizData = (
   data: TechradarData,
   options?: TechradarVizOptions
 ): TechradarVizData => {
-  const { radarSize = 900, blipRadius = 10 } = options || {};
+  const { radarSize = 900, blipRadius = 10, fontColor = 'white' } = options || {};
 
   //setup base scales
   const sliceColorScale = scaleSequential()
@@ -44,14 +45,22 @@ const generateTechradarVizData = (
     return (360 / data.slices.length) * sliceIndex;
   }
 
-  const textAnchor = (x: number): string => {
+  const getAnchor = (x: number, y: number): Anchor => {
+    let anchor: Anchor = {x: 'left', y: 'top'};
     if (x < -10) {
-      return "end";
+      anchor.x = "right";
     } else if (x > 10) {
-      return "start";
+      anchor.x = "left";
     } else {
-      return "middle";
+      anchor.x = "middle";
     }
+
+    if (y < -10) {
+      anchor.y = "bottom"
+    } else {
+      anchor.y = "top";
+    }
+    return anchor;
   }
 
   //generate arc per slice
@@ -103,7 +112,7 @@ const generateTechradarVizData = (
 
   //generate VizData ({slices, areas, blips}) from combining data.slices with data.rings
   const slicesDerivedData = data.slices.reduce(
-    (acc: { areas: any[]; blips: any[]; slices: any[]; }, sliceData, sliceIndex) => {
+    (acc: { areas: TechradarAreaVizData[]; blips: TechradarBlipVizData[]; slices: TechradarSliceVizData[]; }, sliceData, sliceIndex) => {
       const arc = arcs[sliceIndex];
 
       const { blipsByRing, ...sliceDetails } = sliceData;
@@ -121,7 +130,7 @@ const generateTechradarVizData = (
         ...sliceDetails,
         x: x,
         y: y,
-        textAnchor: textAnchor(x),
+        anchor: getAnchor(x, y),
         // startAngle: radius(sliceIndex),
         // endAngle: radius(sliceIndex + 1),
       };
@@ -215,6 +224,7 @@ const generateTechradarVizData = (
                 ...blipData,
                 sliceIndex,
                 ringIndex,
+                blipIndex: 0, // INFO: dummy value, is overriden below
                 x: position.x,
                 y: position.y,
               };
@@ -231,7 +241,7 @@ const generateTechradarVizData = (
 
       return {
         areas: acc.areas.concat(areasAndBlips.areas),
-        blips: acc.blips.concat(areasAndBlips.blips),
+        blips: acc.blips.concat(areasAndBlips.blips).map((blip, idx) => {return {...blip, blipIndex: idx + 1}}),
         slices: acc.slices.concat(slice),
       };
     },
@@ -246,6 +256,7 @@ const generateTechradarVizData = (
     global: {
       radarSize,
       blipRadius,
+      fontColor,
     },
     rings: ringsDerivedData.rings,
     ...slicesDerivedData,
