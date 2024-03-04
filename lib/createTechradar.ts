@@ -5,7 +5,7 @@ import generateTechradarVizData from "./generateTechradarVizData";
 import Tooltip from "./Tooltip";
 
 import type {
-    FontColor,
+    ColorScheme,
   TechradarBlipVizData,
   TechradarData,
   TechradarOptions,
@@ -19,7 +19,7 @@ function highlightLegendItem(blip: TechradarBlipVizData, color: string) {
   legendItem.setAttribute("fill", color);
 }
 
-function unhighlightLegendItem(blip: TechradarBlipVizData, color: FontColor) {
+function unhighlightLegendItem(blip: TechradarBlipVizData, color: ColorScheme) {
   var legendItem = document.getElementById("legendItem-" + blip.blipIndex);
   if (!legendItem) return;
   legendItem.setAttribute("fill", color);
@@ -53,9 +53,6 @@ const createTechradar = (
   //generate areas and blips
   const vizData = generateTechradarVizData(data, vizOptions);
 
-  const size = vizData.global.radarSize + 600;
-  const radarRadius = size / 2;
-
   //setup base svg
   const techradar = select(targetEl)
     .append("svg")
@@ -63,21 +60,14 @@ const createTechradar = (
     .style("-moz-user-select", "none")
     .style("-ms-user-select", "none")
     .style("user-select", "none")
-    .attr("width", size)
-    .attr("height", size);
-  // TODO: make it responsive
-  // .attr("preserveAspectRatio", "xMinYMin meet")
-  // .attr("viewBox", `0 0 ${size} ${size}`)
-  // .classed("svg-content-responsive", true); 
-
 
   //add centered container
-  const container = techradar
-    .append("g")
-    .attr("transform", `translate(${radarRadius}, ${radarRadius})`);
+  const container = techradar.append("g");
+  const radarContainer = container
+    .append("g");
 
   //add areas
-  container
+  radarContainer
     .selectAll("path")
     .data(vizData.areas)
     .enter()
@@ -88,7 +78,7 @@ const createTechradar = (
     .attr("stroke-width", "0.5")
     .attr("d", area => area.path);
 
-  container
+  radarContainer
     .selectAll("g")
     .data(vizData.rings)
     .enter()
@@ -106,7 +96,7 @@ const createTechradar = (
     .text(rings => rings.name)
 
   //add blips
-  const blips = container
+  const blips = radarContainer
     .selectAll("g")
     .data(vizData.blips)
     .enter()
@@ -118,7 +108,6 @@ const createTechradar = (
   blips
     .append("circle")
     .attr("r", vizData.global.blipRadius)
-    .attr("stroke", "black")
     .attr("fill", blip => vizData.rings[blip.ringIndex].color);
 
   blips
@@ -137,16 +126,17 @@ const createTechradar = (
       .on("mouseover", (_, blip) => {
         const blipRect = (event?.target as HTMLInputElement).getBoundingClientRect();
         tooltip.show(blip.name, blipRect.x + blipRect.width / 2, blipRect.y);
+        highlightLegendItem(blip, vizData.rings[blip.ringIndex].color)
       })
-      .on("mouseout", () => {
+      .on("mouseout", (_, blip) => {
         tooltip.hide();
+        unhighlightLegendItem(blip, vizData.global.colorScheme)
       });
   }
 
-  // Add labels
-  const labelsContainer = techradar
-    .append("g")
-    .attr("transform", `translate(${radarRadius}, ${radarRadius})`);
+  // Add legend
+  const labelsContainer = container
+    .append("g");
 
   labelsContainer
     .selectAll("g")
@@ -162,7 +152,7 @@ const createTechradar = (
       .attr("font-family", "Arial, Helvetica")
       .attr("font-size", "18px")
       .attr("font-weight", "bold")
-      .attr("fill", vizData.global.fontColor)
+      .attr("fill", vizData.global.colorScheme)
       .text(vizData.slices[sliceIndex].name);
 
 
@@ -198,7 +188,7 @@ const createTechradar = (
         .style("font-family", "Arial, Helvetica")
         .style("font-size", "11px")
         .attr("id", blip => `legendItem-${blip.blipIndex}`)
-        .attr("fill", vizData.global.fontColor)
+        .attr("fill", vizData.global.colorScheme)
         .attr("dx", counter % 2 === 0 ? dx.left : dx.right)
         .attr("dy", (_, idx) => (counter % 2 === 0 ? dy.left : dy.right) + ((idx + 1) * 20))
         .on("mouseover", (_, blip) => {
@@ -211,7 +201,7 @@ const createTechradar = (
           tooltip.show(blip.name, blipRect.x + blipRect.width / 2, blipRect.y);
         })
         .on("mouseout", (_, blip) => {
-          unhighlightLegendItem(blip, vizData.global.fontColor)
+          unhighlightLegendItem(blip, vizData.global.colorScheme)
           tooltip.hide();
         })
         .text(blip => `${blip.blipIndex}. ${blip.name}`);
@@ -224,14 +214,22 @@ const createTechradar = (
       counter++;
     }
 
+    // Position slice labels
     const bbox = (labelsContainer.select(`#slice-${sliceIndex}`).node() as SVGSVGElement).getBBox();
     labelsContainer
       .select(`#slice-${sliceIndex}`)
       .attr("transform", `translate(${getXTransform(vizData.slices[sliceIndex], bbox)}, ${getYTransform(vizData.slices[sliceIndex], bbox)})`);
-    console.log(bbox);
   }
 
-
+  // Position techradar and labels
+  const X_PADDING = 0;
+  const Y_PADDING = 0;
+  const bRect = (techradar.node() as SVGSVGElement).getBBox();
+  console.log(bRect);
+  techradar
+    .attr("width", bRect.width + X_PADDING).attr("height", bRect.height + Y_PADDING)
+  container
+    .attr("transform", `translate(${Math.abs(bRect.x)}, ${Math.abs(bRect.y)})`);
 
   let isDestroyed = false;
 

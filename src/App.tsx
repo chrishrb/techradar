@@ -1,4 +1,3 @@
-import './App.css'
 import Techradar from '../lib/main'
 
 function App() {
@@ -32,12 +31,36 @@ function App() {
           assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
         },
       },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+        },
+      },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+        },
+      },
+      {
+        name: "Project starter",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+        },
+      },
     ],
   };
 
   return (
     <>
+      <div style={{width: "100%"}}>
       <Techradar data={exampleData}/>
+
+      </div>
     </>
   )
 }

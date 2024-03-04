@@ -8,15 +8,16 @@ import {
 
 import { readableColor } from "polished";
 
-import type {
-  TechradarData,
-  TechradarVizOptions,
-  TechradarVizData,
-  TechradarSliceVizData,
-  TechradarBlipVizData,
-  TechradarAreaVizData,
-  TechradarRingVizData,
-  Anchor,
+import {
+  type TechradarData,
+  type TechradarVizOptions,
+  type TechradarVizData,
+  type TechradarSliceVizData,
+  type TechradarBlipVizData,
+  type TechradarAreaVizData,
+  type TechradarRingVizData,
+  type Anchor,
+  ColorScheme,
 } from "./types";
 import seedrandom from "seedrandom";
 
@@ -24,11 +25,11 @@ const generateTechradarVizData = (
   data: TechradarData,
   options?: TechradarVizOptions
 ): TechradarVizData => {
-  const { radarSize = 900, blipRadius = 10, fontColor = 'white' } = options || {};
+  const { radarSize = 900, blipRadius = 10, colorScheme = ColorScheme.white } = options || {};
 
   //setup base scales
   const sliceColorScale = scaleSequential()
-    .domain([0, data.slices.length])
+    .domain([0, data.rings.length])
     .interpolator(interpolateRainbow);
 
 
@@ -256,7 +257,7 @@ const generateTechradarVizData = (
     global: {
       radarSize,
       blipRadius,
-      fontColor,
+      colorScheme: colorScheme,
     },
     rings: ringsDerivedData.rings,
     ...slicesDerivedData,

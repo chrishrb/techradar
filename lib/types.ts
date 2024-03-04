@@ -1,4 +1,7 @@
-export type FontColor = 'black' | 'white';
+export enum ColorScheme {
+  black = 'white',
+  white = 'black'
+};
 
 export type TechradarRingData = {
   id: string,
@@ -26,7 +29,7 @@ export type TechradarData = {
 export type TechradarVizOptions = {
   radarSize?: number,
   blipRadius?: number,
-  fontColor?: FontColor,
+  colorScheme?: ColorScheme,
 };
 
 export type TechradarOptions = TechradarVizOptions & {
@@ -69,7 +72,7 @@ export type TechradarVizData = {
   global: {
     radarSize: number,
     blipRadius: number,
-    fontColor: 'black' | 'white',
+    colorScheme: ColorScheme,
   },
   areas: TechradarAreaVizData[],
   blips: TechradarBlipVizData[],
