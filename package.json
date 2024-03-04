@@ -1,14 +1,33 @@
 {
   "name": "@chrishrb/techradar",
+  "description": "Create your own technology radar, with flexibility to customize the radar, the quadrants and the rings.",
   "version": "0.0.0",
   "type": "module",
+  "private": false,
   "scripts": {
     "dev": "vite",
     "build": "tsc --p ./tsconfig-build.json && vite build",
+    "build-page": "vite build --config vite.config.page.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishrb/techradar.git"
+  },
+  "keywords": [
+    "techradar",
+    "technology-radar"
+  ],
+  "author": "Christoph Herb <52382992+chrishrb@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrishrb/techradar/issues"
+  },
+  "homepage": "https://github.com/chrishrb/techradar#readme",
   "dependencies": {
+    "@testing-library/react": "^14.2.1",
     "d3": "^7.8.5",
     "polished": "^4.3.1",
     "react": "^18.2.0",
@@ -17,6 +36,7 @@
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
@@ -27,8 +47,18 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "glob": "^10.3.10",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
     "vite-plugin-dts": "^3.7.3"
-  }
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts"
 }

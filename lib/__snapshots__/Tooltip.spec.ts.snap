@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip should inject a hidden div into the body when created 1`] = `
+<div
+  style="font-size: 12px; color: white; opacity: 0; position: fixed; pointer-events: none; border-radius: 3px; background-color: black; padding: 5px 8px;"
+>
+  <span
+    style="white-space: nowrap;"
+  />
+  <div
+    style="color: black; position: absolute; margin-top: -3px; top: 100%; left: 0px; width: 100%; text-align: center;"
+  >
+    ▼
+  </div>
+</div>
+`;
