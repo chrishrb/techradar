@@ -39,7 +39,6 @@ export default class Tooltip {
   show = (text: string, anchorX: number, anchorY: number) => {
     this.tooltipSpan.text(text);
     const node = this.tooltip.node();
-    console.log(node ? node.offsetWidth : 0);
     this.tooltip
       .style("opacity", 1)
       .style("left", anchorX - (node ? node.offsetWidth : 0) / 2 + "px")
