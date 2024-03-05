@@ -59,5 +59,9 @@
   ],
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.1.1",
+  "engines": {
+    "node": ">=21",
+    "pnpm": ">=6"
+  }
 }
