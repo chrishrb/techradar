@@ -1,7 +1,7 @@
 export enum ColorScheme {
   BLACK = 'white',
   WHITE = 'black'
-};
+}
 
 export enum TechradarBlipState {
   UP,

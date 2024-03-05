@@ -45,7 +45,7 @@ const generateTechradarVizData = (
   }
 
   const getAnchor = (x: number, y: number): Anchor => {
-    let anchor: Anchor = {x: 'left', y: 'top'};
+    const anchor: Anchor = {x: 'left', y: 'top'};
     if (x < -10) {
       anchor.x = "right";
     } else if (x > 10) {
@@ -70,6 +70,7 @@ const generateTechradarVizData = (
   const rand = seedrandom("seed");
 
   //generate ring derived data from data.rings
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const ringsDerivedData = data.rings.reduce(
     (acc: { rings: TechradarRingVizData[]; pathInfoList: any; }, ringData, ringIndex) => {
       const innerRadius = radiusScale(ringIndex);

@@ -15,13 +15,13 @@ import {
 } from "./types";
 
 function highlightLegendItem(blip: TechradarBlipVizData, color: string) {
-  var legendItem = document.getElementById("legendItem-" + blip.blipIndex);
+  const legendItem = document.getElementById("legendItem-" + blip.blipIndex);
   if (!legendItem) return;
   legendItem.setAttribute("fill", color);
 }
 
 function unhighlightLegendItem(blip: TechradarBlipVizData, color: ColorScheme) {
-  var legendItem = document.getElementById("legendItem-" + blip.blipIndex);
+  const legendItem = document.getElementById("legendItem-" + blip.blipIndex);
   if (!legendItem) return;
   legendItem.setAttribute("fill", color);
 }
@@ -42,7 +42,7 @@ function getYTransform(slice: TechradarSliceVizData, bbox: DOMRect) {
 }
 
 const createTechradar = (
-  targetEl: any,
+  targetEl: HTMLElement,
   data: TechradarData,
   options?: TechradarOptions
 ): {
@@ -221,7 +221,7 @@ const createTechradar = (
           highlightLegendItem(blip, vizData.rings[ringIndex].color)
 
           // Show tooltip
-          var blipItem = document.getElementById("blip-" + blip.blipIndex);
+          const blipItem = document.getElementById("blip-" + blip.blipIndex);
           if (!blipItem) return;
           const blipRect = blipItem.getBoundingClientRect();
           tooltip.show(blip.name, blipRect.x + blipRect.width / 2, blipRect.y);

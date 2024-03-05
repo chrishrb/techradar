@@ -1,9 +1,9 @@
-import { select } from "d3";
+import { Selection, select } from "d3";
 
 export default class Tooltip {
   // TODO
-  private tooltip: any;
-  private tooltipSpan: any;
+  private tooltip: Selection<HTMLDivElement, unknown, HTMLElement, null>;
+  private tooltipSpan: Selection<HTMLSpanElement, unknown, HTMLElement, null>;
 
   constructor() {
     //create tooltip
@@ -38,10 +38,11 @@ export default class Tooltip {
 
   show = (text: string, anchorX: number, anchorY: number) => {
     this.tooltipSpan.text(text);
+    const node = this.tooltip.node();
     this.tooltip
       .style("opacity", 1)
-      .style("left", anchorX - this.tooltip.node().offsetWidth / 2 + "px")
-      .style("top", anchorY - this.tooltip.node().offsetHeight - 10 + "px");
+      .style("left", anchorX - (node ? node.offsetWidth : 0) / 2 + "px")
+      .style("top", anchorY - (node ? node.offsetWidth : 0) - 10 + "px");
   };
 
   hide = () => {
@@ -51,6 +52,5 @@ export default class Tooltip {
 
   destroy = () => {
     this.tooltip.remove();
-    this.tooltipSpan = this.tooltip = null;
   };
 }
