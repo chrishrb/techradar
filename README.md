@@ -1,5 +1,11 @@
 # Techradar
 
+You can see an example techradar here: https://chrishrb.github.io/techradar/
+
+## Features
+
+TODO
+
 ## Getting started
 
 TODO
@@ -10,7 +16,7 @@ TODO
 
 ## Local Development
 
-1. Install dependencies with yarn
+1. Install dependencies with pnpm
 
 ```bash
 pnpm install
