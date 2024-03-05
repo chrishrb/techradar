@@ -41,7 +41,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm run ci
 
       - name: Build
         run: pnpm build-page

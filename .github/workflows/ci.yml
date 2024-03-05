@@ -18,7 +18,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Run install
-        run: pnpm ci
+        run: pnpm run ci
 
       - name: Run build
         run: pnpm build
