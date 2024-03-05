@@ -42,7 +42,7 @@ function getYTransform(slice: TechradarSliceVizData, bbox: DOMRect) {
 }
 
 const createTechradar = (
-  targetEl: HTMLElement,
+  targetEl: HTMLElement | null,
   data: TechradarData,
   options?: TechradarOptions
 ): {
