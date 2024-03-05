@@ -1,3 +1,4 @@
+import { describe, expect, beforeEach, it, afterEach } from 'vitest'
 import Tooltip from "./Tooltip";
 
 describe("Tooltip", () => {

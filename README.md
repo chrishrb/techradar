@@ -13,18 +13,18 @@ TODO
 1. Install dependencies with yarn
 
 ```bash
-yarn
+pnpm install
 ```
 
 2. Start local development server:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 3. Build and publish package:
 
 ```bash
-yarn build
-yarn publish
+pnpm build
+pnpm publish
 ```
