@@ -1,8 +1,12 @@
-name: CI
-on: [ push ]
-
+name: Publish to NPM
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 jobs:
   build:
+    # prevents this action from running on forks
+    if: github.repository == 'chrishrb/techradar'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,3 +32,8 @@ jobs:
 
       - name: Run test
         run: pnpm test
+
+      - name: Run publish
+        run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
