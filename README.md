@@ -7,6 +7,7 @@ possibility to use a completely variable number of rings and slices.
 
 ![ui](./.github/docs/ui.png)
 
+> [!TIP]
 > You can see example techradars created with this library [here](https://chrishrb.github.io/techradar/)
 
 ## ✨ Features
@@ -18,59 +19,68 @@ possibility to use a completely variable number of rings and slices.
 
 ## 📦 Getting started
 
-```bash
-pnpm add @chrishrb/techradar
-```
+1. Install package with your preferred node package manager
 
-and use the techradar like this:
+  ```bash
+  # pnpm
+  pnpm add @chrishrb/techradar
 
-```ts
-import Techradar, { TechradarData } from '@chrishrb/techradar'
+  # npm
+  npm install @chrishrb/techradar
 
-function App() {
-  const data: TechradarData = {
-    id: "example1",
-    rings: [
-      { id: "adopt", name: "ADOPT" },
-      { id: "trial", name: "TRIAL" },
-      { id: "assess", name: "ASSESS" },
-      { id: "hold", name: "HOLD", color: "#e09b96" },
-    ],
-    slices: [
-      {
-        name: "Frameworks & Ecosystems",
-        blipsByRing: {
-          adopt: [{ name: "React" }],
-          trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
-          hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
+  # yarn
+  yarn add @chrishrb/techradar
+  ```
+
+2. Integrate the techradar like this in your project
+
+  ```ts
+  import Techradar, { TechradarData } from '@chrishrb/techradar'
+
+  function App() {
+    const data: TechradarData = {
+      id: "example1",
+      rings: [
+        { id: "adopt", name: "ADOPT" },
+        { id: "trial", name: "TRIAL" },
+        { id: "assess", name: "ASSESS" },
+        { id: "hold", name: "HOLD", color: "#e09b96" },
+      ],
+      slices: [
+        {
+          name: "Frameworks & Ecosystems",
+          blipsByRing: {
+            adopt: [{ name: "React" }],
+            trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
+            hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
+          },
         },
-      },
-      {
-        name: "Linting & Formatting",
-        blipsByRing: {
-          adopt: [{ name: "ESLint" }, { name: "Prettier" }],
-          assess: [{ name: "AirBNB Eslint Config" }],
+        {
+          name: "Linting & Formatting",
+          blipsByRing: {
+            adopt: [{ name: "ESLint" }, { name: "Prettier" }],
+            assess: [{ name: "AirBNB Eslint Config" }],
+          },
         },
-      },
-      {
-        name: "Languages",
-        blipsByRing: {
-          adopt: [{ name: "CRA (Create React App)" }],
-          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+        {
+          name: "Languages",
+          blipsByRing: {
+            adopt: [{ name: "CRA (Create React App)" }],
+            assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+          },
         },
-      },
-    ],
-  };
+      ],
+    };
 
-  return (
-    <>
-      <Techradar data={example} options={{ radarSize: 600 }} />
-    </>
-  )
-}
+    return (
+      <>
+        <Techradar data={example} options={{ radarSize: 600 }} />
+      </>
+    )
+  }
 
-export default App
-```
+  export default App
+  ```
 
 More examples are provided under the `src` folder in this repository.
 
