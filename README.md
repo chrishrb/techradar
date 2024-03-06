@@ -2,8 +2,8 @@
 
 This project, inspired by [Zalando's](https://github.com/zalando/tech-radar) and [Miguel Silva's](https://github.com/miguel-silva/techradar)
 techradar, enables users to generate a visualization representing the key frameworks, libraries, tools, platforms, and techniques used in
-organizations. It also provides information regarding the adoption level of each of these elements. The difference to other libraries is the
-possibility to use a completely variable number of rings and slices.
+organizations. It also provides information regarding the adoption level of each of these elements. What sets this project apart from other 
+libraries is its unique feature that allows users to customize the number of rings and slices according to their specific needs 
 
 ![ui](./.github/docs/ui.png)
 
