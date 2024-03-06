@@ -23,7 +23,7 @@ function App() {
         }
       </div>
       <div style={{ width: "100%", paddingBottom: "10px", paddingLeft: "20px" }}>
-        <Techradar data={example} options={{ radarSize: 600 }} />
+        <Techradar data={example} options={{ radarSize: 600, colorScheme: 'white' }} />
       </div>
       <table>
         <tbody>

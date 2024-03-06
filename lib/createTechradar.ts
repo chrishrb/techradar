@@ -5,8 +5,6 @@ import generateTechradarVizData from "./generateTechradarVizData";
 import Tooltip from "./Tooltip";
 
 import {
-    TechradarBlipState,
-    type TechradarColorScheme,
   type TechradarBlipVizData,
   type TechradarData,
   type TechradarOptions,
@@ -20,7 +18,7 @@ function highlightLegendItem(blip: TechradarBlipVizData, color: string) {
   legendItem.setAttribute("fill", color);
 }
 
-function unhighlightLegendItem(blip: TechradarBlipVizData, color: TechradarColorScheme) {
+function unhighlightLegendItem(blip: TechradarBlipVizData, color: string) {
   const legendItem = document.getElementById("legendItem-" + blip.blipIndex);
   if (!legendItem) return;
   legendItem.setAttribute("fill", color);
@@ -109,19 +107,19 @@ const createTechradar = (
     .attr("transform", blip => `translate(${blip.x}, ${blip.y})`);
 
   blips
-    .filter(blip => blip.state === TechradarBlipState.STABLE || blip.state === undefined)
+    .filter(blip => blip.state === 'stable' || blip.state === undefined)
     .append("circle")
     .attr("r", vizData.global.blipRadius)
     .attr("fill", blip => vizData.rings[blip.ringIndex].color);
 
   blips
-    .filter(blip => blip.state === TechradarBlipState.UP)
+    .filter(blip => blip.state === 'up')
     .append("path")
     .attr("d", symbol(symbolTriangle).size(vizData.global.blipRadius * 30))
     .attr("fill", blip => vizData.rings[blip.ringIndex].color);
 
   blips
-    .filter(blip => blip.state === TechradarBlipState.DOWN)
+    .filter(blip => blip.state === 'down')
     .append("path")
     .attr("d", symbol(symbolTriangle).size(vizData.global.blipRadius * 30))
     .attr("fill", blip => vizData.rings[blip.ringIndex].color)
@@ -151,7 +149,7 @@ const createTechradar = (
       })
       .on("mouseout", (_, blip) => {
         tooltip.hide();
-        unhighlightLegendItem(blip, vizData.global.colorScheme)
+        unhighlightLegendItem(blip, vizData.global.mainColor)
       });
   }
 
@@ -173,7 +171,7 @@ const createTechradar = (
       .attr("font-family", "Arial, Helvetica")
       .attr("font-size", "18px")
       .attr("font-weight", "bold")
-      .attr("fill", vizData.global.colorScheme)
+      .attr("fill", vizData.global.mainColor)
       .text(vizData.slices[sliceIndex].name);
 
 
@@ -209,7 +207,7 @@ const createTechradar = (
         .style("font-family", "Arial, Helvetica")
         .style("font-size", "11px")
         .attr("id", blip => `legendItem-${blip.blipIndex}`)
-        .attr("fill", vizData.global.colorScheme)
+        .attr("fill", vizData.global.mainColor)
         .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
         .attr("dy", () => {
           const step = 15;
@@ -229,7 +227,7 @@ const createTechradar = (
           tooltip.show(blip.name, blipRect.x + blipRect.width / 2, blipRect.y);
         })
         .on("mouseout", (_, blip) => {
-          unhighlightLegendItem(blip, vizData.global.colorScheme)
+          unhighlightLegendItem(blip, vizData.global.mainColor)
           tooltip.hide();
         })
         .text(blip => `${blip.blipIndex}. ${blip.name}`);
@@ -259,7 +257,7 @@ const createTechradar = (
     .text("▲ moved up     ▼ moved down")
     .attr("xml:space", "preserve")
     .style("font-family", "Arial, Helvetica")
-    .attr("fill", vizData.global.colorScheme)
+    .attr("fill", vizData.global.mainColor)
     .style("font-size", "10px");
 
   // Position techradar and labels

@@ -1,4 +1,4 @@
-import { TechradarBlipState, TechradarData } from "../../lib/main";
+import { TechradarData } from "../../lib/main";
 
 const data: TechradarData = {
   id: "example2",
@@ -36,7 +36,7 @@ const data: TechradarData = {
       blipsByRing: {
         adopt: [{ name: "AWS CodePipeline" }],
         trial: [{ name: "Jenkins" }],
-        hold: [{ name: "Bamboo", state: TechradarBlipState.DOWN }, { name: "TeamCity" }],
+        hold: [{ name: "Bamboo", state: 'down' }, { name: "TeamCity" }],
       },
     },
   ],

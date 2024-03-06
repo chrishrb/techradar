@@ -1,4 +1,4 @@
-import { TechradarBlipState, TechradarData } from "../../lib/main";
+import { TechradarData } from "../../lib/main";
 
 const data: TechradarData = {
   id: "example1",
@@ -36,16 +36,16 @@ const data: TechradarData = {
       blipsByRing: {
         adopt: [{ name: "AWS CodePipeline" }],
         trial: [{ name: "Jenkins" }],
-        hold: [{ name: "Bamboo", state: TechradarBlipState.DOWN }, { name: "TeamCity" }],
+        hold: [{ name: "Bamboo", state: 'down' }, { name: "TeamCity" }],
       },
     },
     {
       name: "Datastores",
       blipsByRing: {
-        adopt: [{ name: "Postgres" }, { name: "Redis", state: TechradarBlipState.UP, url: "https://redis.io/" }],
+        adopt: [{ name: "Postgres" }, { name: "Redis", state: 'up', url: "https://redis.io/" }],
         trial: [{ name: "MongoDB" }],
         assess: [{ name: "Cassandra" }],
-        hold: [{ name: "MySQL" }, { name: "SQLite" }, { name: "CouchDB", state: TechradarBlipState.UP }],
+        hold: [{ name: "MySQL" }, { name: "SQLite" }, { name: "CouchDB", state: 'up' }],
       },
     },
     {
@@ -54,7 +54,7 @@ const data: TechradarData = {
         adopt: [{ name: "REST" }],
         trial: [{ name: "GraphQL" }, { name: "Apollo Client" }],
         assess: [{ name: "Falcor" }],
-        hold: [{ name: "SOAP", state: TechradarBlipState.DOWN }],
+        hold: [{ name: "SOAP", state: 'down' }],
       },
     },
   ],
