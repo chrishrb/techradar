@@ -1,7 +1,7 @@
 {
   "name": "@chrishrb/techradar",
   "description": "Create your own technology radar, with flexibility to customize the radar, the quadrants and the rings.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "prepublishOnly": "pnpm run build",
   "type": "module",
