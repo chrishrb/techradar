@@ -10,4 +10,6 @@ import type {
 
 export default Techradar;
 
-export type { TechradarData, TechradarOptions, TechradarVizData, TechradarBlipState, TechradarColorScheme }
+export { TechradarColorScheme, TechradarBlipState };
+
+export type { TechradarData, TechradarOptions, TechradarVizData };

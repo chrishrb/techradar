@@ -1,4 +1,4 @@
-import { TechradarData } from "../../lib/types";
+import { TechradarData } from "../../lib/main";
 
 const data: TechradarData = {
   id: "example3",

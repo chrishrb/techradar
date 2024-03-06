@@ -1,4 +1,4 @@
-import { TechradarBlipState, TechradarData } from "../../lib/types";
+import { TechradarBlipState, TechradarData } from "../../lib/main";
 
 const data: TechradarData = {
   id: "example1",
