@@ -1,7 +1,7 @@
 {
   "name": "@chrishrb/techradar",
   "description": "Create your own technology radar, with flexibility to customize the radar, the quadrants and the rings.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "ci": "pnpm install --frozen-lockfile",
