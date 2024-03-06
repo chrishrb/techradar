@@ -29,6 +29,7 @@ export type TechradarSliceData = {
 };
 
 export type TechradarData = {
+  id?: string,
   slices: TechradarSliceData[],
   rings: TechradarRingData[],
 };

@@ -1,82 +1,37 @@
+import { useState } from 'react';
 import Techradar, { TechradarData } from '../lib/main'
-import { TechradarBlipState } from '../lib/types';
+import example1 from './examples/example1';
+import example2 from './examples/example2';
+import example3 from './examples/example3';
 
 function App() {
-  const exampleData: TechradarData = {
-    rings: [
-      { id: "adopt", name: "ADOPT" },
-      { id: "trial", name: "TRIAL" },
-      { id: "assess", name: "ASSESS" },
-      { id: "hold", name: "HOLD", color: "#e09b96" },
-    ],
-    slices: [
-      {
-        name: "Frameworks & Ecosystems",
-        blipsByRing: {
-          adopt: [{ name: "React" }],
-          trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
-          hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
-        },
-      },
-      {
-        name: "Linting & Formatting",
-        blipsByRing: {
-          adopt: [{ name: "ESLint" }, { name: "Prettier" }],
-          assess: [{ name: "AirBNB Eslint Config" }],
-        },
-      },
-      {
-        name: "Languages",
-        blipsByRing: {
-          adopt: [{ name: "CRA (Create React App)" }],
-          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
-        },
-      },
-      {
-        name: "Infrastucture",
-        blipsByRing: {
-          adopt: [{ name: "AWS CodePipeline" }],
-          trial: [{ name: "Jenkins" }],
-          hold: [{ name: "Bamboo", state: TechradarBlipState.DOWN }, { name: "TeamCity" }],
-        },
-      },
-      {
-        name: "Datastores",
-        blipsByRing: {
-          adopt: [{ name: "Postgres" }, { name: "Redis", state: TechradarBlipState.UP, url: "https://redis.io/" }],
-          trial: [{ name: "MongoDB" }],
-          assess: [{ name: "Cassandra" }],
-          hold: [{ name: "MySQL" }, { name: "SQLite" }, { name: "CouchDB", state: TechradarBlipState.UP }],
-        },
-      },
-      {
-        name: "Data Management",
-        blipsByRing: {
-          adopt: [{ name: "REST" }],
-          trial: [{ name: "GraphQL" }, { name: "Apollo Client" }],
-          assess: [{ name: "Falcor" }],
-          hold: [{ name: "SOAP", state: TechradarBlipState.DOWN }],
-        },
-      },
-    ],
-  };
+  const [example, setExample] = useState<TechradarData>(example1);
 
   return (
     <>
       <div style={{ paddingLeft: "20px" }}>
-        <h1 style={{ fontFamily: "Arial, Helvetica", fontSize: "30px", fontWeight: "bold", marginBottom: "0px" }}>Tech Radar</h1>
-        <p style={{ fontFamily: "Arial, Helvetica", fontSize: "14px", color: "rgb(153, 153, 153)", marginTop: "0px" }}>2024.1</p>
+        <div style={{ paddingBottom: "10px" }}>
+        <h2 style={{ fontFamily: "Arial, Helvetica", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>Choose an example:</h2>
+        <button style={{margin: "5px", marginLeft: "0px"}} onClick={() => setExample(example1)}>Example 1</button>
+        <button style={{margin: "5px"}} onClick={() => setExample(example2)}>Example 2</button>
+        <button style={{margin: "5px"}} onClick={() => setExample(example3)}>Example 3</button>
+        </div>
+
+        <h1 style={{ fontFamily: "Arial, Helvetica", fontSize: "30px", fontWeight: "bold", marginBottom: "0px" }}>Techradar Example</h1>
+        { example.id && 
+          <p style={{ fontFamily: "Arial, Helvetica", fontSize: "14px", color: "rgb(153, 153, 153)", marginTop: "0px", marginLeft: "5px" }}>{ example.id }</p>
+        }
       </div>
-      <div style={{ width: "100%", paddingBottom: "10px" }}>
-        <Techradar data={exampleData} options={{ radarSize: 600 }} />
+      <div style={{ width: "100%", paddingBottom: "10px", paddingLeft: "20px" }}>
+        <Techradar data={example} options={{ radarSize: 600 }} />
       </div>
       <table>
         <tbody>
           <tr>
             <td>
-              <h3>What is the Tech Radar?</h3>
+              <h3>What is the techradar?</h3>
               <p>
-                The Tech Radar is a list of technologies, complemented by an assessment result, called <em>ring assignment</em>. In this example the following rings are used:
+                The techradar is a list of technologies, complemented by an assessment result, called <em>ring assignment</em>. In this example the following rings are used:
               </p>
 
               <ul>
@@ -91,13 +46,13 @@ function App() {
               <h3>What is the purpose?</h3>
 
               <p>
-                The Tech Radar is a tool to inspire and support Engineering teams to pick the best technologies for new projects; it provides a platform to share knowledge and experience in technologies, to reflect on technology decisions and continuously evolve our technology landscape. Based on the <a href="https://opensource.zalando.com/tech-radar/#"> work of Zalando</a>, this Tech Radar sets out the changes in technologies that are interesting in software development &mdash; changes that we think our engineering teams should pay attention to and use in their projects.
+                The techradar is a tool to inspire and support Engineering teams to pick the best technologies for new projects; it provides a platform to share knowledge and experience in technologies, to reflect on technology decisions and continuously evolve our technology landscape. Based on the <a href="https://opensource.zalando.com/tech-radar/#"> work of Zalando</a>, this techradar sets out the changes in technologies that are interesting in software development &mdash; changes that we think our engineering teams should pay attention to and use in their projects.
               </p>
 
               <h3>How do we maintain it?</h3>
 
               <p>
-                The Tech Radar is maintained by our <em>Principal Engineers</em> &mdash; who facilitate and drive the technology selection discussions across the Engineering Community. Assignment of technologies to rings is the outcome of ring change proposals, which are discussed and voted on. The Tech Radar is open for contribution for all Engineering teams at Zalando and depends on their active participation to share lessons learned, pitfalls, and contribute to good practices on using the technologies.<br />
+                The techradar is maintained by our <em>Principal Engineers</em> &mdash; who facilitate and drive the technology selection discussions across the Engineering Community. Assignment of technologies to rings is the outcome of ring change proposals, which are discussed and voted on. The techradar is open for contribution for all Engineering teams at Zalando and depends on their active participation to share lessons learned, pitfalls, and contribute to good practices on using the technologies.<br />
               </p>
             </td></tr>
         </tbody>

@@ -55,7 +55,9 @@ const createTechradar = (
   const vizData = generateTechradarVizData(data, vizOptions);
 
   //setup base svg
-  const techradar = select(targetEl)
+  const svg = select(targetEl);
+  svg.selectAll("*").remove()
+  const techradar = svg
     .append("svg")
     .style("-webkit-user-select", "none")
     .style("-moz-user-select", "none")
@@ -84,7 +86,7 @@ const createTechradar = (
     .data(vizData.rings)
     .enter()
     .append("text")
-    .attr("y", rings => rings.y)
+    .attr("y", ring => ring.y)
     .attr("dy", vizData.global.radarSize/12)
     .attr("text-anchor", "middle")
     .attr("opacity", 0.35)
@@ -93,8 +95,8 @@ const createTechradar = (
     .attr("font-weight", "bold")
     .attr("pointer-events", "none")
     .attr("user-select", "none")
-    .attr("fill", rings => rings.color)
-    .text(rings => rings.name)
+    .attr("fill", ring => ring.color)
+    .text(ring => ring.name)
 
   //add blips
   const blips = radarContainer

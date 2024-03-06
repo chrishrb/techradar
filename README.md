@@ -1,20 +1,80 @@
 # Techradar
 
-You can see an example techradar here: https://chrishrb.github.io/techradar/
+This project, inspired by [Zalando's](https://github.com/zalando/tech-radar) and [Miguel Silva's](https://github.com/miguel-silva/techradar)
+techradar, enables users to generate a visualization representing the key frameworks, libraries, tools, platforms, and techniques used in
+organizations. It also provides information regarding the adoption level of each of these elements. The difference to other libraries is the
+possibility to use a completely variable number of rings and slices.
 
-## Features
+![ui](./.github/docs/ui.png)
 
-TODO
+> You can see example techradars created with this library [here](https://chrishrb.github.io/techradar/)
 
-## Getting started
+## ✨ Features
 
-TODO
+* visualize your technology in rings and slices
+* integrate in your own code by only installing and using this library
+* variable number of rings
+* variable number of slices / quadrants
 
-## Deployment
+## 📦 Getting started
 
-TODO
+```bash
+pnpm add @chrishrb/techradar
+```
 
-## Local Development
+and use the techradar like this:
+
+```ts
+import Techradar, { TechradarData } from '@chrishrb/techradar'
+
+function App() {
+  const data: TechradarData = {
+    id: "example1",
+    rings: [
+      { id: "adopt", name: "ADOPT" },
+      { id: "trial", name: "TRIAL" },
+      { id: "assess", name: "ASSESS" },
+      { id: "hold", name: "HOLD", color: "#e09b96" },
+    ],
+    slices: [
+      {
+        name: "Frameworks & Ecosystems",
+        blipsByRing: {
+          adopt: [{ name: "React" }],
+          trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
+          hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
+        },
+      },
+      {
+        name: "Linting & Formatting",
+        blipsByRing: {
+          adopt: [{ name: "ESLint" }, { name: "Prettier" }],
+          assess: [{ name: "AirBNB Eslint Config" }],
+        },
+      },
+      {
+        name: "Languages",
+        blipsByRing: {
+          adopt: [{ name: "CRA (Create React App)" }],
+          assess: [{ name: "Next.js" }, { name: "React App Rewired" }],
+        },
+      },
+    ],
+  };
+
+  return (
+    <>
+      <Techradar data={example} options={{ radarSize: 600 }} />
+    </>
+  )
+}
+
+export default App
+```
+
+More examples are provided under the `src` folder in this repository.
+
+## ⚡️ Local Development
 
 1. Install dependencies with pnpm
 
@@ -34,3 +94,8 @@ pnpm dev
 pnpm build
 pnpm publish
 ```
+
+## 📄 Acknowledgements
+
+- https://github.com/miguel-silva/techradar
+- https://github.com/zalando/tech-radar
