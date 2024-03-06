@@ -18,6 +18,7 @@ jobs:
       - name: Use Node.js 21
         uses: actions/setup-node@v3
         with:
+          registry-url: https://registry.npmjs.org/
           node-version: 21
           cache: 'pnpm'
 
