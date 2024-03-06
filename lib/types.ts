@@ -1,4 +1,4 @@
-export enum ColorScheme {
+export enum TechradarColorScheme {
   BLACK = 'white',
   WHITE = 'black'
 }
@@ -37,7 +37,7 @@ export type TechradarData = {
 export type TechradarVizOptions = {
   radarSize?: number,
   blipRadius?: number,
-  colorScheme?: ColorScheme,
+  colorScheme?: TechradarColorScheme,
 };
 
 export type TechradarOptions = TechradarVizOptions & {
@@ -80,7 +80,7 @@ export type TechradarVizData = {
   global: {
     radarSize: number,
     blipRadius: number,
-    colorScheme: ColorScheme,
+    colorScheme: TechradarColorScheme,
   },
   areas: TechradarAreaVizData[],
   blips: TechradarBlipVizData[],

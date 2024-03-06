@@ -15,7 +15,7 @@ import {
   type TechradarAreaVizData,
   type TechradarRingVizData,
   type Anchor,
-  ColorScheme,
+  TechradarColorScheme,
 } from "./types";
 import seedrandom from "seedrandom";
 
@@ -23,7 +23,7 @@ const generateTechradarVizData = (
   data: TechradarData,
   options?: TechradarVizOptions
 ): TechradarVizData => {
-  const { radarSize = 900, blipRadius = 10, colorScheme = ColorScheme.WHITE } = options || {};
+  const { radarSize = 900, blipRadius = 10, colorScheme = TechradarColorScheme.WHITE } = options || {};
 
   //setup base scales
   const sliceColorScale = scaleSequential()

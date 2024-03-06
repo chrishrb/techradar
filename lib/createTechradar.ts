@@ -6,7 +6,7 @@ import Tooltip from "./Tooltip";
 
 import {
     TechradarBlipState,
-    type ColorScheme,
+    type TechradarColorScheme,
   type TechradarBlipVizData,
   type TechradarData,
   type TechradarOptions,
@@ -20,7 +20,7 @@ function highlightLegendItem(blip: TechradarBlipVizData, color: string) {
   legendItem.setAttribute("fill", color);
 }
 
-function unhighlightLegendItem(blip: TechradarBlipVizData, color: ColorScheme) {
+function unhighlightLegendItem(blip: TechradarBlipVizData, color: TechradarColorScheme) {
   const legendItem = document.getElementById("legendItem-" + blip.blipIndex);
   if (!legendItem) return;
   legendItem.setAttribute("fill", color);
@@ -259,6 +259,7 @@ const createTechradar = (
     .text("▲ moved up     ▼ moved down")
     .attr("xml:space", "preserve")
     .style("font-family", "Arial, Helvetica")
+    .attr("fill", vizData.global.colorScheme)
     .style("font-size", "10px");
 
   // Position techradar and labels
