@@ -11,15 +11,15 @@ function App() {
     <>
       <div style={{ paddingLeft: "20px" }}>
         <div style={{ paddingBottom: "10px" }}>
-        <h2 style={{ fontFamily: "Arial, Helvetica", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>Choose an example:</h2>
-        <button style={{margin: "5px", marginLeft: "0px"}} onClick={() => setExample(example1)}>Example 1</button>
-        <button style={{margin: "5px"}} onClick={() => setExample(example2)}>Example 2</button>
-        <button style={{margin: "5px"}} onClick={() => setExample(example3)}>Example 3</button>
+          <h2 style={{ fontFamily: "Arial, Helvetica", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>Choose an example:</h2>
+          <button style={{ margin: "5px", marginLeft: "0px" }} onClick={() => setExample(example1)}>Example 1</button>
+          <button style={{ margin: "5px" }} onClick={() => setExample(example2)}>Example 2</button>
+          <button style={{ margin: "5px" }} onClick={() => setExample(example3)}>Example 3</button>
         </div>
 
         <h1 style={{ fontFamily: "Arial, Helvetica", fontSize: "30px", fontWeight: "bold", marginBottom: "0px" }}>Techradar Example</h1>
-        { example.id && 
-          <p style={{ fontFamily: "Arial, Helvetica", fontSize: "14px", color: "rgb(153, 153, 153)", marginTop: "0px", marginLeft: "5px" }}>{ example.id }</p>
+        {example.id &&
+          <p style={{ fontFamily: "Arial, Helvetica", fontSize: "14px", color: "rgb(153, 153, 153)", marginTop: "0px", marginLeft: "5px" }}>{example.id}</p>
         }
       </div>
       <div style={{ width: "100%", paddingBottom: "10px", paddingLeft: "20px" }}>

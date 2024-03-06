@@ -32,7 +32,7 @@ libraries is its unique feature that allows users to customize the number of rin
   yarn add @chrishrb/techradar
   ```
 
-2. Integrate the techradar like this in your project
+2. Integrate the techradar in your project
 
   ```ts
   import Techradar, { TechradarData } from '@chrishrb/techradar'
