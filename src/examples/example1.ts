@@ -51,7 +51,7 @@ const data: TechradarData = {
     {
       name: "Data Management",
       blipsByRing: {
-        adopt: [{ name: "REST" }],
+        adopt: [{ name: "REST", url:"https://github.com/moj-analytical-services/techradar/discussions/2" }],
         trial: [{ name: "GraphQL" }, { name: "Apollo Client" }],
         assess: [{ name: "Falcor" }],
         hold: [{ name: "SOAP", state: 'down' }],
