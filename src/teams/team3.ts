@@ -1,7 +1,7 @@
 import { TechradarData } from "../../lib/main";
 
 const data: TechradarData = {
-  id: "example3",
+  id: "team3",
   rings: [
     { id: "adopt", name: "ADOPT" },
     { id: "assess", name: "ASSESS" },
