@@ -12,7 +12,7 @@ const data: TechradarData = {
     {
       name: "Frameworks & Ecosystems",
       blipsByRing: {
-        adopt: [{ name: "React" }],
+        adopt: [{ name: "React", icon: "\ue7ba" }],
         trial: [{ name: "Vue" }, { name: "Angular (2+)" }],
         hold: [{ name: "AngularJS (1)" }, { name: "jQuery" }],
       },
@@ -20,7 +20,7 @@ const data: TechradarData = {
     {
       name: "Linting & Formatting",
       blipsByRing: {
-        adopt: [{ name: "ESLint" }, { name: "Prettier" }],
+        adopt: [{ name: "ESLint", icon: "\ue655" }, { name: "Prettier" }],
         assess: [{ name: "AirBNB Eslint Config" }],
       },
     },
@@ -34,7 +34,7 @@ const data: TechradarData = {
     {
       name: "Infrastucture",
       blipsByRing: {
-        adopt: [{ name: "AWS CodePipeline" }],
+        adopt: [{ name: "AWS CodePipeline", icon: "\uf0ef" }],
         trial: [{ name: "Jenkins" }],
         hold: [{ name: "Bamboo", state: 'down' }, { name: "TeamCity" }],
       },

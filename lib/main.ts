@@ -1,4 +1,5 @@
 import { Techradar } from "./Techradar";
+import "./radar.css";
 
 import type {
   TechradarData,

@@ -12,6 +12,7 @@ export type TechradarBlipData = {
   name: string,
   url?: string,
   state?: TechradarBlipState,
+  icon?: string,
 };
 
 export type TechradarSliceData = {
@@ -50,6 +51,7 @@ export type TechradarBlipVizData = TechradarBlipData & {
   ringIndex: number,
   x: number,
   y: number,
+  icon?: string,
 };
 
 export type Anchor = {

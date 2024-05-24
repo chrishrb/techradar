@@ -1,4 +1,3 @@
-import "./radar.css";
 import { useEffect, useRef } from "react";
 import createTechradar from "./createTechradar";
 import { TechradarData, TechradarOptions } from "./types";

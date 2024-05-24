@@ -129,13 +129,14 @@ const createTechradar = (
     .append("text")
     .style("pointer-events", "none")
     .attr("dy", 4)
+    .attr("class", (blip) => blip.icon != null ? "nf" : "")
     .attr("font-family", "Arial, Helvetica")
-    .attr("font-size", "10px")
+    .attr("font-size", `${vizData.global.blipRadius}px`)
     .attr("pointer-events", "none")
     .attr("user-select", "none")
     .attr("text-anchor", "middle")
     .attr("fill", blip => vizData.rings[blip.ringIndex].textColor)
-    .text(blip => blip.blipIndex);
+    .text(blip => blip.icon ? blip.icon : blip.blipIndex);
 
   let tooltip: Tooltip;
   if (blipTooltipEnabled) {
@@ -169,7 +170,7 @@ const createTechradar = (
       .selectAll(`#slice-${sliceIndex}`)
       .append("text")
       .attr("font-family", "Arial, Helvetica")
-      .attr("font-size", "18px")
+      .style("font-size", `${vizData.global.blipRadius + 6}px`)
       .attr("font-weight", "bold")
       .attr("fill", vizData.global.mainColor)
       .text(vizData.slices[sliceIndex].name);
@@ -186,7 +187,7 @@ const createTechradar = (
         .selectAll(`#slice-${sliceIndex}`)
         .append("text")
         .attr("font-family", "Arial, Helvetica")
-        .attr("font-size", "12px")
+        .style("font-size", `${vizData.global.blipRadius + 1}px`)
         .attr("font-weight", "bold")
         .attr("fill", vizData.rings[ringIndex].color)
         .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
@@ -204,19 +205,10 @@ const createTechradar = (
         .attr("href", blip => blip.url ? blip.url : "#")
         .attr("target", blip => blip.url && options?.linksInNewTabs ? "_blank" : null)
         .append("text")
-        .style("font-family", "Arial, Helvetica")
-        .style("font-size", "11px")
+        .attr("font-family", "Arial, Helvetica")
+        .style("font-size", `${vizData.global.blipRadius}px`)
         .attr("id", blip => `legendItem-${blip.blipIndex}`)
         .attr("fill", vizData.global.mainColor)
-        .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
-        .attr("dy", () => {
-          const step = 15;
-          if (counter % 2 === 0) {
-            return leftCoords.y += step;
-          } else {
-            return rightCoords.y += step;
-          }
-        })
         .on("mouseover", (_, blip) => {
           highlightLegendItem(blip, vizData.rings[ringIndex].color)
 
@@ -230,7 +222,20 @@ const createTechradar = (
           unhighlightLegendItem(blip, vizData.global.mainColor)
           tooltip.hide();
         })
-        .text(blip => `${blip.blipIndex}. ${blip.name}`);
+        .attr("dx", counter % 2 === 0 ? leftCoords.x : rightCoords.x)
+        .attr("dy", () => {
+          const step = 15;
+          if (counter % 2 === 0) {
+            return leftCoords.y += step;
+          } else {
+            return rightCoords.y += step;
+          }
+        })
+        .attr("class", (blip) => blip.icon != null ? "nf" : "")
+        .text(blip => `${blip.icon ? blip.icon : blip.blipIndex}. `)
+        .append("tspan")
+        .style("font-family", "Arial, Helvetica")
+        .text(blip => blip.name)
 
       if (counter % 2 === 0) {
         leftCoords.y += 30;
@@ -258,7 +263,7 @@ const createTechradar = (
     .attr("xml:space", "preserve")
     .style("font-family", "Arial, Helvetica")
     .attr("fill", vizData.global.mainColor)
-    .style("font-size", "10px");
+    .attr("font-size", `${vizData.global.blipRadius}px`)
 
   // Position techradar and labels
   techradar

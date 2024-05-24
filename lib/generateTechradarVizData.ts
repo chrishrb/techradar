@@ -22,7 +22,7 @@ const generateTechradarVizData = (
   data: TechradarData,
   options?: TechradarVizOptions
 ): TechradarVizData => {
-  const { radarSize = 900, blipRadius = 10, colorScheme = 'white' } = options || {};
+  const { radarSize = 900, blipRadius = 12, colorScheme = 'white' } = options || {};
   const mainColor = colorScheme === 'white' ? 'black' : 'white';
 
   //setup base scales

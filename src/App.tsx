@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <div style={{ paddingLeft: "20px" }}>
+        <i className="fa-brands fa-facebook"></i>
         <div style={{ paddingBottom: "10px" }}>
           <h2 style={{ fontFamily: "Arial, Helvetica", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>Choose an example:</h2>
           <button style={{ margin: "5px", marginLeft: "0px" }} onClick={() => setExample(example1)}>Example 1</button>

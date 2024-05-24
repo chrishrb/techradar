@@ -16,6 +16,7 @@ libraries is its unique feature that allows users to customize the number of rin
 * integrate in your own code by only installing and using this library
 * variable number of rings
 * variable number of slices / quadrants
+* use [nerdfonts icons](https://www.nerdfonts.com/cheat-sheet)
 
 ## 📦 Getting started
 
@@ -83,6 +84,24 @@ libraries is its unique feature that allows users to customize the number of rin
   ```
 
 More examples are provided under the `src` folder in this repository.
+
+##  Icons
+
+You can also use icons instead of numbers for the blips. Go to [nerdfonts](https://www.nerdfonts.com/cheat-sheet) and choose
+an icon. Afterwards copy the hexcode to your config and add the `\u` as a prefix. So in this example the hexcode of the react logo is
+`e7ba`, add the prefix `\u` and paste it into the blips configuration. **Important: Only the 4 digit hexcodes are working**:
+
+```typescript
+...
+  slices: [
+    {
+      name: "Frameworks & Ecosystems",
+      blipsByRing: {
+        adopt: [{ name: "React", icon: "\ue7ba" }],
+      },
+    },
+...
+```
 
 ## ⚡️ Local Development
 
