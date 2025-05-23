@@ -104,7 +104,10 @@ const createTechradar = (
     .append("g")
     .attr("id", blip => `blip-${blip.blipIndex}`)
     .style("font-size", "12")
-    .attr("transform", blip => `translate(${blip.x}, ${blip.y})`);
+    .attr("transform", blip => `translate(${blip.x}, ${blip.y})`)
+    .append("a")
+    .attr("href", blip => blip.url ? blip.url : "#")
+    .attr("target", blip => blip.url && options?.linksInNewTabs ? "_blank" : null);
 
   blips
     .filter(blip => blip.state === 'stable' || blip.state === undefined)
